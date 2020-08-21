@@ -39,3 +39,16 @@ bzl_library(
         ":bazel_tools",
     ],
 )
+
+bzl_library(
+    name = "toolchains_go",
+    srcs = [
+        "toolchains/go.bzl",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":bazel_tools",
+        ":nixpkgs",
+        "@io_bazel_rules_go//go:go_lib",
+    ],
+)
