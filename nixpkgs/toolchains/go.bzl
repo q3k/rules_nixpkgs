@@ -24,7 +24,7 @@ def nixpkgs_go_configure(
     This command allows to setup hermetic go sdk from Nixpkgs, which should be considerate as best practice.
 
     Note that nix package must provide full go sdk at the root of package instead of in $out/share/go
-    And also provide an empty normal file named PACKAGE_ROOT at the root of package
+    And also provide an empty normal file named ROOT at the root of package
     """
 
     if not nix_file and not nix_file_content:
@@ -35,7 +35,7 @@ def nixpkgs_go_configure(
                 go
               ];
               postBuild = ''
-                touch $out/PACKAGE_ROOT
+                touch $out/ROOT
                 ln -s $out/share/go/{api,doc,lib,misc,pkg,src} $out/
               '';
             }
@@ -53,4 +53,4 @@ def nixpkgs_go_configure(
         nixopts = nixopts,
     )
 
-    go_wrap_sdk(name = sdk_name, root_file = "@nixpkgs_go_toolchain//:PACKAGE_ROOT")
+    go_wrap_sdk(name = sdk_name, root_file = "@nixpkgs_go_toolchain//:ROOT")
